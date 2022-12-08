@@ -9,10 +9,10 @@ class SignInBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ResponsiveLayout(
       mobile: SignInForm(),
-      tablet: FixedLayout(
+      tablet: FixedWidthLayout(
         child: SignInForm(),
       ),
-      desktop: FixedLayout(
+      desktop: FixedWidthLayout(
         child: SignInForm(),
       ),
     );

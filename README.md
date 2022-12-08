@@ -9,18 +9,19 @@ This is my submission for Arrivo's Part-time position to develop a Management Po
 3. UI Design: Material Design (Google)
 
 ### App Architecture
-The app architecture follows the foour main components of DDD, as laid out below.
+The app architecture follows the four main components of DDD, as laid out below.
 
-> - lib
->   - application
->       - ...
->   - domain
->       - ...
->   - infrastructure
->       - ...
->   - presentation
->       - feature
->           - widgets
->               - ...
->           - feature.dart
->   - main.dart
+``` > lib
+        > application
+            > ...
+        > domain
+            > ...
+        > infrastructure
+            > ...
+        > presentation
+            > feature
+                > widgets
+                    > ...
+            > feature.dart
+        > main.dart
+```

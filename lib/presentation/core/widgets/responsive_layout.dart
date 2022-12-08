@@ -26,8 +26,8 @@ class ResponsiveLayout extends StatelessWidget {
   }
 }
 
-class FixedLayout extends StatelessWidget {
-  const FixedLayout({
+class FixedWidthLayout extends StatelessWidget {
+  const FixedWidthLayout({
     super.key,
     this.defaultWidth = 650,
     required this.child,
