@@ -1,5 +1,4 @@
 import 'package:arrivo_web_test/infrastructure/posts/post_dto.dart';
-import 'package:arrivo_web_test/injection.dart';
 import 'package:enum_to_string/camel_case_to_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,70 +62,65 @@ class LandingPosts extends StatelessWidget {
       ),
     ];
 
-    return BlocProvider(
-      create: (context) => getIt<PostsBloc>()..add(const LoadAllPosts()),
-      child: BlocBuilder<PostsBloc, PostsState>(
-        builder: (context, state) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: WebDataTable(
-                header: const Text('Sample Posts'),
-                actions: [
-                  SizedBox(
-                    width: 300,
-                    child: TextField(
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        hintText: 'Search...',
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFFCCCCCC),
-                          ),
-                        ),
-                        isDense: true,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFFCCCCCC),
-                          ),
+    return BlocBuilder<PostsBloc, PostsState>(
+      builder: (context, state) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: WebDataTable(
+              header: const Text('Sample Posts'),
+              actions: [
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Search...',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFCCCCCC),
                         ),
                       ),
-                      onChanged: (text) {
-                        context.read<PostsBloc>().add(FilterKeywords(text));
-                      },
+                      isDense: true,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFCCCCCC),
+                        ),
+                      ),
                     ),
+                    onChanged: (text) {
+                      context.read<PostsBloc>().add(FilterKeywords(text));
+                    },
                   ),
-                ],
-                columnSpacing: 150,
-                // horizontalMargin: 50,
-                availableRowsPerPage: const [10, 15, 20],
-                rowsPerPage: state.rowsPerPage,
-                onRowsPerPageChanged: (rowsPerPage) {
-                  if (rowsPerPage != null) {
-                    context
-                        .read<PostsBloc>()
-                        .add(ToggleRowsPerPage(rowsPerPage));
-                  }
-                },
-                onSort: (columnName, ascending) {
-                  context
-                      .read<PostsBloc>()
-                      .add(SortColumn(columnName, ascending));
-                },
-                source: WebDataTableSource(
-                  sortAscending: state.sortAscending,
-                  sortColumnName: state.sortColumnName,
-                  filterTexts: state.filterTexts,
-                  columns: webDataColumns,
-                  rows: state.loadedPosts
-                      .map((e) => PostDTO.fromDomain(e).toJson())
-                      .toList(),
                 ),
+              ],
+              columnSpacing: 150,
+              // horizontalMargin: 50,
+              availableRowsPerPage: const [10, 15, 20],
+              rowsPerPage: state.rowsPerPage,
+              onRowsPerPageChanged: (rowsPerPage) {
+                if (rowsPerPage != null) {
+                  context.read<PostsBloc>().add(ToggleRowsPerPage(rowsPerPage));
+                }
+              },
+              onSort: (columnName, ascending) {
+                context
+                    .read<PostsBloc>()
+                    .add(SortColumn(columnName, ascending));
+              },
+              source: WebDataTableSource(
+                sortAscending: state.sortAscending,
+                sortColumnName: state.sortColumnName,
+                filterTexts: state.filterTexts,
+                columns: webDataColumns,
+                rows: state.loadedPosts
+                    .map((e) => PostDTO.fromDomain(e).toJson())
+                    .toList(),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

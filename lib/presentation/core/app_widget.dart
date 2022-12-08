@@ -1,4 +1,5 @@
 import 'package:arrivo_web_test/application/auth/auth_bloc.dart';
+import 'package:arrivo_web_test/application/posts/posts_bloc.dart';
 import 'package:arrivo_web_test/presentation/core/button_themes.dart';
 import 'package:arrivo_web_test/presentation/core/colors.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,16 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final appRouter = getIt<AppRouter>();
 
-    return BlocProvider(
-      create: (context) =>
-          getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested()),
+        ),
+        BlocProvider(
+          create: (context) => getIt<PostsBloc>(),
+        ),
+      ],
       child: MaterialApp.router(
         title: 'Arrivo Test Portal',
         routerDelegate: appRouter.delegate(),
