@@ -11,7 +11,8 @@ This is my submission for Arrivo's Part-time position to develop a Management Po
 ### App Architecture
 The app architecture follows the four main components of DDD, as laid out below.
 
-``` > lib
+``` 
+    > lib
         > application
             > ...
         > domain

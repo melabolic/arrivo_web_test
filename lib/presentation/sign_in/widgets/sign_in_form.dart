@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
+import '../../routes/router.gr.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({super.key});
@@ -33,7 +36,9 @@ class SignInForm extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              context.router.push(const LandingRoute());
+            },
             child: const Text('SIGN IN'),
           ),
           const SizedBox(height: 12),
@@ -43,7 +48,9 @@ class SignInForm extends StatelessWidget {
             children: [
               const Text('Don\'t have an account?'),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.router.push(const RegisterRoute());
+                },
                 child: const Text('Register Now'),
               ),
             ],
