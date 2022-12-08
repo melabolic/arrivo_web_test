@@ -6,7 +6,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:arrivo_web_test/application/auth/auth_bloc.dart' as _i3;
-import 'package:arrivo_web_test/application/register/register_bloc.dart' as _i4;
+import 'package:arrivo_web_test/application/posts/posts_bloc.dart' as _i4;
+import 'package:arrivo_web_test/application/register/register_bloc.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -24,7 +25,8 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     gh.factory<_i3.AuthBloc>(() => _i3.AuthBloc());
-    gh.factory<_i4.RegisterBloc>(() => _i4.RegisterBloc());
+    gh.factory<_i4.PostsBloc>(() => _i4.PostsBloc());
+    gh.factory<_i5.RegisterBloc>(() => _i5.RegisterBloc());
     return this;
   }
 }

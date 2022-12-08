@@ -21,6 +21,10 @@ dependencies:
   injectable: ^2.1.0
   json_annotation: ^4.7.0
   uuid: ^3.0.7
+  enum_to_string: ^2.0.1
+  flutter_web_data_table: ^1.0.0
+  string_extensions: ^0.1.4
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

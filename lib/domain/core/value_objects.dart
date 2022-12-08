@@ -4,6 +4,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:uuid/uuid.dart';
 
 import 'failures.dart';
+import 'value_validators.dart';
 
 @immutable
 abstract class ValueObject<T> {
@@ -60,4 +61,32 @@ class UniqueId extends ValueObject<String> {
   }
 
   const UniqueId._(this.value);
+}
+
+class CreatedAt extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory CreatedAt(String? input) {
+    assert(input != null);
+    return CreatedAt._(
+      validateStringNotEmpty(input!),
+    );
+  }
+
+  const CreatedAt._(this.value);
+}
+
+class UpdatedAt extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory UpdatedAt(String? input) {
+    assert(input != null);
+    return UpdatedAt._(
+      validateStringNotEmpty(input!),
+    );
+  }
+
+  const UpdatedAt._(this.value);
 }
