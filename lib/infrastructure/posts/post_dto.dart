@@ -19,6 +19,15 @@ class PostDTO with _$PostDTO {
     required int userId,
   }) = _PostDTO;
 
+  factory PostDTO.empty() {
+    return const PostDTO(
+      id: -1,
+      title: '',
+      body: '',
+      userId: -1,
+    );
+  }
+
   factory PostDTO.fromDomain(Post post) {
     return PostDTO(
       id: post.postId.getOrCrash(),
