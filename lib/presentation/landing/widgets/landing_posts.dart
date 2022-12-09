@@ -1,5 +1,6 @@
-import 'package:arrivo_web_test/infrastructure/posts/post_dto.dart';
-import 'package:enum_to_string/camel_case_to_words.dart';
+import 'package:arrivo_web_test/presentation/routes/router.gr.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_data_table/web_data_table.dart';
@@ -39,7 +40,8 @@ class LandingPosts extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         dataCell: (value) => DataCell(
-          Text(camelCaseToWords(value.toString()).toTitleCase()),
+          Text(EnumToString.convertToString(value, camelCase: true)
+              .toTitleCase()),
         ),
       ),
       WebDataColumn(
@@ -48,7 +50,10 @@ class LandingPosts extends StatelessWidget {
           'Label',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        dataCell: (value) => DataCell(Text(value.toString().capitalize())),
+        dataCell: (value) => DataCell(
+          Text(EnumToString.convertToString(value, camelCase: true)
+              .toTitleCase()),
+        ),
       ),
       WebDataColumn(
         name: 'updatedAt',
@@ -62,6 +67,8 @@ class LandingPosts extends StatelessWidget {
       ),
     ];
 
+    context.read<PostsBloc>().add(const LoadAllPosts());
+
     return BlocBuilder<PostsBloc, PostsState>(
       builder: (context, state) {
         return SingleChildScrollView(
@@ -71,7 +78,7 @@ class LandingPosts extends StatelessWidget {
               header: const Text('Sample Posts'),
               actions: [
                 SizedBox(
-                  width: 300,
+                  width: MediaQuery.of(context).size.width < 550 ? 160 : 300,
                   child: TextField(
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search),
@@ -94,7 +101,7 @@ class LandingPosts extends StatelessWidget {
                   ),
                 ),
               ],
-              columnSpacing: 150,
+              // columnSpacing: 150,
               // horizontalMargin: 50,
               availableRowsPerPage: const [10, 15, 20],
               rowsPerPage: state.rowsPerPage,
@@ -111,11 +118,14 @@ class LandingPosts extends StatelessWidget {
               source: WebDataTableSource(
                 sortAscending: state.sortAscending,
                 sortColumnName: state.sortColumnName,
-                filterTexts: state.filterTexts,
+                filterTexts: state.filterTexts.asList(),
                 columns: webDataColumns,
-                rows: state.loadedPosts
-                    .map((e) => PostDTO.fromDomain(e).toJson())
-                    .toList(),
+                rows: state.loadedPosts.asList().map((e) => e.toJson).toList(),
+                onTapRow: (rows, index) {
+                  context.router.push(PostDetailsRoute(
+                    postId: rows[index]['postId'].toString(),
+                  ));
+                },
               ),
             ),
           ),

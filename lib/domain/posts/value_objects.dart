@@ -5,11 +5,11 @@ import '../core/failures.dart';
 import '../core/value_objects.dart';
 import '../core/value_validators.dart';
 
-class PostID extends ValueObject<String> {
+class PostID extends ValueObject<int> {
   @override
-  final Either<ValueFailure<String>, String> value;
+  final Either<ValueFailure<int>, int> value;
 
-  factory PostID(String input) {
+  factory PostID(int input) {
     return PostID._(right(input));
   }
 

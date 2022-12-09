@@ -1,9 +1,9 @@
 import 'package:arrivo_web_test/domain/core/enums.dart';
 import 'package:arrivo_web_test/domain/posts/post.dart';
-import 'package:arrivo_web_test/domain/posts/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/core/value_objects.dart';
+import '../../domain/posts/value_objects.dart';
 
 part 'post_dto.freezed.dart';
 part 'post_dto.g.dart';
@@ -13,39 +13,31 @@ class PostDTO with _$PostDTO {
   const PostDTO._();
 
   const factory PostDTO({
-    required String postId,
+    required int id,
     required String title,
     required String body,
-    required String categoryId,
-    required PostStatusEnum status,
-    required MembershipTierEnum label,
-    required String createdAt,
-    required String updatedAt,
+    required int userId,
   }) = _PostDTO;
 
   factory PostDTO.fromDomain(Post post) {
     return PostDTO(
-      postId: post.postId.getOrCrash(),
+      id: post.postId.getOrCrash(),
       title: post.title.getOrCrash(),
       body: post.body.getOrCrash(),
-      categoryId: post.categoryId.getOrCrash(),
-      status: post.status.getOrCrash(),
-      label: post.label.getOrCrash(),
-      createdAt: post.createdAt.getOrCrash(),
-      updatedAt: post.updatedAt.getOrCrash(),
+      userId: 101, // set default userId for API use
     );
   }
 
   Post toDomain() {
     return Post(
-      postId: PostID(postId),
+      postId: PostID(id),
       title: PostTitle(title),
       body: PostBody(body),
-      categoryId: CategoryID(categoryId),
-      status: PostStatus(status),
-      label: PostLabel(label),
-      createdAt: CreatedAt(createdAt),
-      updatedAt: UpdatedAt(updatedAt),
+      categoryId: CategoryID('None'),
+      status: PostStatus(PostStatusEnum.pendingReview),
+      label: PostLabel(MembershipTierEnum.normal),
+      createdAt: CreatedAt(DateTime.now().toIso8601String()),
+      updatedAt: UpdatedAt(DateTime.now().toIso8601String()),
     );
   }
 

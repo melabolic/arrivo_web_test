@@ -20,14 +20,10 @@ PostDTO _$PostDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PostDTO {
-  String get postId => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
-  String get categoryId => throw _privateConstructorUsedError;
-  PostStatusEnum get status => throw _privateConstructorUsedError;
-  MembershipTierEnum get label => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get updatedAt => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,15 +35,7 @@ abstract class $PostDTOCopyWith<$Res> {
   factory $PostDTOCopyWith(PostDTO value, $Res Function(PostDTO) then) =
       _$PostDTOCopyWithImpl<$Res, PostDTO>;
   @useResult
-  $Res call(
-      {String postId,
-      String title,
-      String body,
-      String categoryId,
-      PostStatusEnum status,
-      MembershipTierEnum label,
-      String createdAt,
-      String updatedAt});
+  $Res call({int id, String title, String body, int userId});
 }
 
 /// @nodoc
@@ -63,20 +51,16 @@ class _$PostDTOCopyWithImpl<$Res, $Val extends PostDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postId = null,
+    Object? id = null,
     Object? title = null,
     Object? body = null,
-    Object? categoryId = null,
-    Object? status = null,
-    Object? label = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? userId = null,
   }) {
     return _then(_value.copyWith(
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -85,26 +69,10 @@ class _$PostDTOCopyWithImpl<$Res, $Val extends PostDTO>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as PostStatusEnum,
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as MembershipTierEnum,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -116,15 +84,7 @@ abstract class _$$_PostDTOCopyWith<$Res> implements $PostDTOCopyWith<$Res> {
       __$$_PostDTOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String postId,
-      String title,
-      String body,
-      String categoryId,
-      PostStatusEnum status,
-      MembershipTierEnum label,
-      String createdAt,
-      String updatedAt});
+  $Res call({int id, String title, String body, int userId});
 }
 
 /// @nodoc
@@ -137,20 +97,16 @@ class __$$_PostDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postId = null,
+    Object? id = null,
     Object? title = null,
     Object? body = null,
-    Object? categoryId = null,
-    Object? status = null,
-    Object? label = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? userId = null,
   }) {
     return _then(_$_PostDTO(
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -159,26 +115,10 @@ class __$$_PostDTOCopyWithImpl<$Res>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as PostStatusEnum,
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as MembershipTierEnum,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -187,39 +127,27 @@ class __$$_PostDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PostDTO extends _PostDTO {
   const _$_PostDTO(
-      {required this.postId,
+      {required this.id,
       required this.title,
       required this.body,
-      required this.categoryId,
-      required this.status,
-      required this.label,
-      required this.createdAt,
-      required this.updatedAt})
+      required this.userId})
       : super._();
 
   factory _$_PostDTO.fromJson(Map<String, dynamic> json) =>
       _$$_PostDTOFromJson(json);
 
   @override
-  final String postId;
+  final int id;
   @override
   final String title;
   @override
   final String body;
   @override
-  final String categoryId;
-  @override
-  final PostStatusEnum status;
-  @override
-  final MembershipTierEnum label;
-  @override
-  final String createdAt;
-  @override
-  final String updatedAt;
+  final int userId;
 
   @override
   String toString() {
-    return 'PostDTO(postId: $postId, title: $title, body: $body, categoryId: $categoryId, status: $status, label: $label, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'PostDTO(id: $id, title: $title, body: $body, userId: $userId)';
   }
 
   @override
@@ -227,23 +155,15 @@ class _$_PostDTO extends _PostDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PostDTO &&
-            (identical(other.postId, postId) || other.postId == postId) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.body, body) || other.body == body) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.label, label) || other.label == label) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, postId, title, body, categoryId,
-      status, label, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, title, body, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -261,34 +181,22 @@ class _$_PostDTO extends _PostDTO {
 
 abstract class _PostDTO extends PostDTO {
   const factory _PostDTO(
-      {required final String postId,
+      {required final int id,
       required final String title,
       required final String body,
-      required final String categoryId,
-      required final PostStatusEnum status,
-      required final MembershipTierEnum label,
-      required final String createdAt,
-      required final String updatedAt}) = _$_PostDTO;
+      required final int userId}) = _$_PostDTO;
   const _PostDTO._() : super._();
 
   factory _PostDTO.fromJson(Map<String, dynamic> json) = _$_PostDTO.fromJson;
 
   @override
-  String get postId;
+  int get id;
   @override
   String get title;
   @override
   String get body;
   @override
-  String get categoryId;
-  @override
-  PostStatusEnum get status;
-  @override
-  MembershipTierEnum get label;
-  @override
-  String get createdAt;
-  @override
-  String get updatedAt;
+  int get userId;
   @override
   @JsonKey(ignore: true)
   _$$_PostDTOCopyWith<_$_PostDTO> get copyWith =>

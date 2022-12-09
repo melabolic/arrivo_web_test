@@ -178,7 +178,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 
 /// @nodoc
 
-class _$_Post implements _Post {
+class _$_Post extends _Post {
   const _$_Post(
       {required this.postId,
       required this.title,
@@ -187,7 +187,8 @@ class _$_Post implements _Post {
       required this.status,
       required this.label,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt})
+      : super._();
 
   @override
   final PostID postId;
@@ -240,7 +241,7 @@ class _$_Post implements _Post {
       __$$_PostCopyWithImpl<_$_Post>(this, _$identity);
 }
 
-abstract class _Post implements Post {
+abstract class _Post extends Post {
   const factory _Post(
       {required final PostID postId,
       required final PostTitle title,
@@ -250,6 +251,7 @@ abstract class _Post implements Post {
       required final PostLabel label,
       required final CreatedAt createdAt,
       required final UpdatedAt updatedAt}) = _$_Post;
+  const _Post._() : super._();
 
   @override
   PostID get postId;

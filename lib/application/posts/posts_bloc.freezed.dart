@@ -839,10 +839,10 @@ abstract class ToggleRowsPerPage implements PostsEvent {
 
 /// @nodoc
 mixin _$PostsState {
-  List<Post> get loadedPosts => throw _privateConstructorUsedError;
+  KtList<Post> get loadedPosts => throw _privateConstructorUsedError;
   int get rowsPerPage => throw _privateConstructorUsedError;
   MembershipTierEnum get membershipTier => throw _privateConstructorUsedError;
-  List<String> get filterTexts => throw _privateConstructorUsedError;
+  KtList<String> get filterTexts => throw _privateConstructorUsedError;
   String? get sortColumnName => throw _privateConstructorUsedError;
   bool get sortAscending => throw _privateConstructorUsedError;
 
@@ -858,10 +858,10 @@ abstract class $PostsStateCopyWith<$Res> {
       _$PostsStateCopyWithImpl<$Res, PostsState>;
   @useResult
   $Res call(
-      {List<Post> loadedPosts,
+      {KtList<Post> loadedPosts,
       int rowsPerPage,
       MembershipTierEnum membershipTier,
-      List<String> filterTexts,
+      KtList<String> filterTexts,
       String? sortColumnName,
       bool sortAscending});
 }
@@ -890,7 +890,7 @@ class _$PostsStateCopyWithImpl<$Res, $Val extends PostsState>
       loadedPosts: null == loadedPosts
           ? _value.loadedPosts
           : loadedPosts // ignore: cast_nullable_to_non_nullable
-              as List<Post>,
+              as KtList<Post>,
       rowsPerPage: null == rowsPerPage
           ? _value.rowsPerPage
           : rowsPerPage // ignore: cast_nullable_to_non_nullable
@@ -902,7 +902,7 @@ class _$PostsStateCopyWithImpl<$Res, $Val extends PostsState>
       filterTexts: null == filterTexts
           ? _value.filterTexts
           : filterTexts // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as KtList<String>,
       sortColumnName: freezed == sortColumnName
           ? _value.sortColumnName
           : sortColumnName // ignore: cast_nullable_to_non_nullable
@@ -924,10 +924,10 @@ abstract class _$$_PostStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Post> loadedPosts,
+      {KtList<Post> loadedPosts,
       int rowsPerPage,
       MembershipTierEnum membershipTier,
-      List<String> filterTexts,
+      KtList<String> filterTexts,
       String? sortColumnName,
       bool sortAscending});
 }
@@ -952,9 +952,9 @@ class __$$_PostStateCopyWithImpl<$Res>
   }) {
     return _then(_$_PostState(
       loadedPosts: null == loadedPosts
-          ? _value._loadedPosts
+          ? _value.loadedPosts
           : loadedPosts // ignore: cast_nullable_to_non_nullable
-              as List<Post>,
+              as KtList<Post>,
       rowsPerPage: null == rowsPerPage
           ? _value.rowsPerPage
           : rowsPerPage // ignore: cast_nullable_to_non_nullable
@@ -964,9 +964,9 @@ class __$$_PostStateCopyWithImpl<$Res>
           : membershipTier // ignore: cast_nullable_to_non_nullable
               as MembershipTierEnum,
       filterTexts: null == filterTexts
-          ? _value._filterTexts
+          ? _value.filterTexts
           : filterTexts // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as KtList<String>,
       sortColumnName: freezed == sortColumnName
           ? _value.sortColumnName
           : sortColumnName // ignore: cast_nullable_to_non_nullable
@@ -983,35 +983,21 @@ class __$$_PostStateCopyWithImpl<$Res>
 
 class _$_PostState implements _PostState {
   const _$_PostState(
-      {required final List<Post> loadedPosts,
+      {required this.loadedPosts,
       required this.rowsPerPage,
       required this.membershipTier,
-      required final List<String> filterTexts,
+      required this.filterTexts,
       required this.sortColumnName,
-      required this.sortAscending})
-      : _loadedPosts = loadedPosts,
-        _filterTexts = filterTexts;
+      required this.sortAscending});
 
-  final List<Post> _loadedPosts;
   @override
-  List<Post> get loadedPosts {
-    if (_loadedPosts is EqualUnmodifiableListView) return _loadedPosts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_loadedPosts);
-  }
-
+  final KtList<Post> loadedPosts;
   @override
   final int rowsPerPage;
   @override
   final MembershipTierEnum membershipTier;
-  final List<String> _filterTexts;
   @override
-  List<String> get filterTexts {
-    if (_filterTexts is EqualUnmodifiableListView) return _filterTexts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_filterTexts);
-  }
-
+  final KtList<String> filterTexts;
   @override
   final String? sortColumnName;
   @override
@@ -1027,14 +1013,14 @@ class _$_PostState implements _PostState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PostState &&
-            const DeepCollectionEquality()
-                .equals(other._loadedPosts, _loadedPosts) &&
+            (identical(other.loadedPosts, loadedPosts) ||
+                other.loadedPosts == loadedPosts) &&
             (identical(other.rowsPerPage, rowsPerPage) ||
                 other.rowsPerPage == rowsPerPage) &&
             (identical(other.membershipTier, membershipTier) ||
                 other.membershipTier == membershipTier) &&
-            const DeepCollectionEquality()
-                .equals(other._filterTexts, _filterTexts) &&
+            (identical(other.filterTexts, filterTexts) ||
+                other.filterTexts == filterTexts) &&
             (identical(other.sortColumnName, sortColumnName) ||
                 other.sortColumnName == sortColumnName) &&
             (identical(other.sortAscending, sortAscending) ||
@@ -1042,14 +1028,8 @@ class _$_PostState implements _PostState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_loadedPosts),
-      rowsPerPage,
-      membershipTier,
-      const DeepCollectionEquality().hash(_filterTexts),
-      sortColumnName,
-      sortAscending);
+  int get hashCode => Object.hash(runtimeType, loadedPosts, rowsPerPage,
+      membershipTier, filterTexts, sortColumnName, sortAscending);
 
   @JsonKey(ignore: true)
   @override
@@ -1060,21 +1040,21 @@ class _$_PostState implements _PostState {
 
 abstract class _PostState implements PostsState {
   const factory _PostState(
-      {required final List<Post> loadedPosts,
+      {required final KtList<Post> loadedPosts,
       required final int rowsPerPage,
       required final MembershipTierEnum membershipTier,
-      required final List<String> filterTexts,
+      required final KtList<String> filterTexts,
       required final String? sortColumnName,
       required final bool sortAscending}) = _$_PostState;
 
   @override
-  List<Post> get loadedPosts;
+  KtList<Post> get loadedPosts;
   @override
   int get rowsPerPage;
   @override
   MembershipTierEnum get membershipTier;
   @override
-  List<String> get filterTexts;
+  KtList<String> get filterTexts;
   @override
   String? get sortColumnName;
   @override

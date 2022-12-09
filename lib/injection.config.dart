@@ -5,9 +5,20 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:arrivo_web_test/application/auth/auth_bloc.dart' as _i3;
-import 'package:arrivo_web_test/application/posts/posts_bloc.dart' as _i4;
-import 'package:arrivo_web_test/application/register/register_bloc.dart' as _i5;
+import 'package:arrivo_web_test/application/auth/auth_bloc.dart' as _i5;
+import 'package:arrivo_web_test/application/posts/post_details/post_details_bloc.dart'
+    as _i9;
+import 'package:arrivo_web_test/application/posts/posts_bloc.dart' as _i10;
+import 'package:arrivo_web_test/application/register/register_bloc.dart'
+    as _i11;
+import 'package:arrivo_web_test/domain/posts/i_post_repository.dart' as _i7;
+import 'package:arrivo_web_test/infrastructure/core/injectable_module.dart'
+    as _i12;
+import 'package:arrivo_web_test/infrastructure/posts/post_repository.dart'
+    as _i8;
+import 'package:arrivo_web_test/infrastructure/services/api_client.dart' as _i3;
+import 'package:arrivo_web_test/presentation/routes/router.gr.dart' as _i4;
+import 'package:dio/dio.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -24,9 +35,20 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i3.AuthBloc>(() => _i3.AuthBloc());
-    gh.factory<_i4.PostsBloc>(() => _i4.PostsBloc());
-    gh.factory<_i5.RegisterBloc>(() => _i5.RegisterBloc());
+    final injectableModule = _$InjectableModule();
+    gh.lazySingleton<_i3.ApiClient>(() => injectableModule.apiClient);
+    gh.lazySingleton<_i4.AppRouter>(() => injectableModule.appRouter);
+    gh.factory<_i5.AuthBloc>(() => _i5.AuthBloc());
+    gh.lazySingleton<_i6.Dio>(() => injectableModule.dio);
+    gh.lazySingleton<_i7.IPostRepository>(
+        () => _i8.PostRepository(apiClient: gh<_i3.ApiClient>()));
+    gh.factory<_i9.PostDetailsBloc>(
+        () => _i9.PostDetailsBloc(postRepo: gh<_i7.IPostRepository>()));
+    gh.factory<_i10.PostsBloc>(
+        () => _i10.PostsBloc(postRepo: gh<_i7.IPostRepository>()));
+    gh.factory<_i11.RegisterBloc>(() => _i11.RegisterBloc());
     return this;
   }
 }
+
+class _$InjectableModule extends _i12.InjectableModule {}

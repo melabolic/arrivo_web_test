@@ -9,7 +9,7 @@ import 'value_objects.dart';
 part 'user.freezed.dart';
 
 @freezed
-abstract class User implements _$User {
+class User with _$User {
   const User._();
 
   const factory User({

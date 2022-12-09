@@ -1,11 +1,12 @@
 import 'package:arrivo_web_test/domain/core/enums.dart';
+import 'package:arrivo_web_test/domain/posts/i_post_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kt_dart/kt.dart';
 
-import '../../domain/core/value_objects.dart';
 import '../../domain/posts/post.dart';
-import '../../domain/posts/value_objects.dart';
 
 part 'posts_bloc.freezed.dart';
 part 'posts_event.dart';
@@ -13,13 +14,17 @@ part 'posts_state.dart';
 
 @injectable
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
-  PostsBloc() : super(PostsState.initial()) {
+  PostsBloc({required IPostRepository postRepo})
+      : _postRepo = postRepo,
+        super(PostsState.initial()) {
     on<ToggleRowsPerPage>(_onToggleRowsPerPage);
     on<LoadAllPosts>(_onLoadAllPosts);
     on<SortColumn>(_onSortColumn);
     on<ConfigureMembershipTier>(_onConfigureMembershipTier);
     on<FilterKeywords>(_onFilterKeywords);
   }
+
+  final IPostRepository _postRepo;
 
   Future<void> _onConfigureMembershipTier(
     ConfigureMembershipTier event,
@@ -42,28 +47,15 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
     LoadAllPosts event,
     Emitter<PostsState> emit,
   ) async {
-    // TODO: use demo API to retrieve data
-    final data = List.generate(
-        200,
-        (index) => Post(
-              postId: PostID('$index'),
-              title: PostTitle('Article $index'),
-              body: PostBody('Body text $index'),
-              categoryId: CategoryID('Category $index'),
-              status: PostStatus(PostStatusEnum.pendingReview),
-              label: PostLabel(index % 2 > 0
-                  ? MembershipTierEnum.normal
-                  : MembershipTierEnum.premium),
-              createdAt: CreatedAt(DateTime.now().toIso8601String()),
-              updatedAt: UpdatedAt(DateTime.now().toIso8601String()),
-            ));
+    final option = await _postRepo.getAllPosts();
+    var data = option.fold((l) => null, id);
 
-    if (state.membershipTier == MembershipTierEnum.normal) {
+    if (data != null && state.membershipTier == MembershipTierEnum.normal) {
       data.retainWhere(
         (post) => post.label.getOrCrash() != MembershipTierEnum.premium,
       );
     }
-    emit(state.copyWith(loadedPosts: data));
+    emit(state.copyWith(loadedPosts: KtList.from(data ?? [])));
   }
 
   Future<void> _onToggleRowsPerPage(
@@ -78,6 +70,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
     Emitter<PostsState> emit,
   ) async {
     final keywords = event.input.split(' ');
-    emit(state.copyWith(filterTexts: keywords));
+    emit(state.copyWith(filterTexts: KtList.from(keywords)));
   }
 }

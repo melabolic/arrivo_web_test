@@ -8,6 +8,8 @@ part 'post.freezed.dart';
 
 @freezed
 class Post with _$Post {
+  const Post._();
+
   const factory Post({
     required PostID postId,
     required PostTitle title,
@@ -20,7 +22,7 @@ class Post with _$Post {
   }) = _Post;
 
   factory Post.empty() => Post(
-        postId: PostID(''),
+        postId: PostID(-1),
         title: PostTitle(''),
         body: PostBody(''),
         categoryId: CategoryID(''),
@@ -29,4 +31,17 @@ class Post with _$Post {
         createdAt: CreatedAt(''),
         updatedAt: UpdatedAt(''),
       );
+
+  Map<String, dynamic> get toJson {
+    return {
+      'postId': postId.getOrCrash(),
+      'title': title.getOrCrash(),
+      'body': body.getOrCrash(),
+      'categoryId': categoryId.getOrCrash(),
+      'status': status.getOrCrash(),
+      'label': label.getOrCrash(),
+      'createdAt': createdAt.getOrCrash(),
+      'updatedAt': updatedAt.getOrCrash(),
+    };
+  }
 }
