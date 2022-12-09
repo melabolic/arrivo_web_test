@@ -26,3 +26,17 @@ The app architecture follows the four main components of DDD, as laid out below.
             > feature.dart
         > main.dart
 ```
+
+***
+
+### Features
+
+1. Sign In (bottom buttons included for demo purposes)
+
+2. Register
+
+3. Posts Table
+
+4. Post Details (including delete for *Premium* members)
+
+5. New Post
